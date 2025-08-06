@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import Navbar from '../components/Navbar';
 import HeroSection from '../components/HeroSection';
 import FeaturesSection from '../components/FeaturesSection';
-import UseCasesSection from '../components/UseCasesSection';
+import PortfolioShowcase from '../components/PortfolioShowcase';
 
 const LandingPage = () => {
   return (
@@ -11,7 +11,7 @@ const LandingPage = () => {
       <Navbar />
       <HeroSection />
       <FeaturesSection />
-      <UseCasesSection />
+      <PortfolioShowcase />
     </Box>
   );
 };

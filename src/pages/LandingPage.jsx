@@ -5,6 +5,7 @@ import HeroSection from '../components/HeroSection';
 import FeaturesSection from '../components/FeaturesSection';
 import PortfolioShowcase from '../components/PortfolioShowcase';
 import UseCasesSection from '../components/UseCasesSection';
+import UserSection from '../components/UserSection';
 
 const LandingPage = () => {
   return (
@@ -16,11 +17,14 @@ const LandingPage = () => {
       <Box id="features">
         <FeaturesSection />
       </Box>
-      <Box id="showcase">
-        <PortfolioShowcase />
+      <Box id="users">
+        <UserSection />
       </Box>
       <Box id="use-cases">
         <UseCasesSection />
+      </Box>
+      <Box id="showcase">
+        <PortfolioShowcase />
       </Box>
     </Box>
   );

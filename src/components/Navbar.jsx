@@ -28,10 +28,12 @@ const Navbar = () => {
   };
 
   const navItems = [
-    { text: 'Use Cases', id: 'use-cases' },
+    { text: 'Home', id: 'hero' },
     { text: 'Features', id: 'features' },
-    { text: 'Showcase', id: 'showcase' },
-    { text: 'Hero', id: 'hero' }
+    { text: 'Users', id: 'users' },
+    { text: 'Use Cases', id: 'use-cases' },
+    { text: 'Explore', id: 'showcase' }
+    
   ];
 
   const drawer = (

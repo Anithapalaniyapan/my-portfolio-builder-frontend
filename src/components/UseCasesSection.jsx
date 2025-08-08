@@ -1,209 +1,131 @@
 import React from 'react';
-import { Box, Typography, Grid, Card, CardContent, Avatar, Chip, Fade, Container } from '@mui/material';
-import CameraAltIcon from '@mui/icons-material/CameraAlt';
-import PaletteIcon from '@mui/icons-material/Palette';
-import BrushIcon from '@mui/icons-material/Brush';
-import CodeIcon from '@mui/icons-material/Code';
-import MusicNoteIcon from '@mui/icons-material/MusicNote';
-import RestaurantIcon from '@mui/icons-material/Restaurant';
+import { Box, Typography, Grid, Chip, Fade } from '@mui/material';
+import WorkIcon from '@mui/icons-material/Work';
+import SchoolIcon from '@mui/icons-material/School';
+import BusinessIcon from '@mui/icons-material/Business';
+import PersonIcon from '@mui/icons-material/Person';
+import GroupIcon from '@mui/icons-material/Group';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 
+// Use cases data
 const useCases = [
   {
-    icon: <CameraAltIcon sx={{ fontSize: 40, color: '#ff6b6b' }} />,
-    title: 'Photographers',
-    description: 'Showcase your stunning photography portfolio with beautiful galleries and client testimonials.',
-    gradient: 'linear-gradient(135deg, #ff6b6b, #ee5a52)',
-    features: ['Gallery Layouts', 'Client Portal', 'Booking System'],
-    color: '#ff6b6b',
-    bgGradient: 'linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(238, 90, 82, 0.05))'
+    id: 1,
+    title: 'Job Seekers',
+    icon: <WorkIcon sx={{ fontSize: 36, color: '#667eea' }} />,
+    description: 'Stand out in competitive job markets with a professional portfolio.',
+    color: '#667eea'
   },
   {
-    icon: <PaletteIcon sx={{ fontSize: 40, color: '#4ecdc4' }} />,
-    title: 'Artists',
-    description: 'Display your creative artwork with customizable galleries and online store integration.',
-    gradient: 'linear-gradient(135deg, #4ecdc4, #44a08d)',
-    features: ['Art Galleries', 'Online Store', 'Commission Requests'],
-    color: '#4ecdc4',
-    bgGradient: 'linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(68, 160, 141, 0.05))'
+    id: 2,
+    title: 'Students & Graduates',
+    icon: <SchoolIcon sx={{ fontSize: 36, color: '#f093fb' }} />,
+    description: 'Build your first professional presence and showcase academic projects.',
+    color: '#f093fb'
   },
   {
-    icon: <BrushIcon sx={{ fontSize: 40, color: '#45b7d1' }} />,
-    title: 'Designers',
-    description: 'Present your design projects with interactive case studies and process showcases.',
-    gradient: 'linear-gradient(135deg, #45b7d1, #96c93d)',
-    features: ['Case Studies', 'Process Showcase', 'Client Work'],
-    color: '#45b7d1',
-    bgGradient: 'linear-gradient(135deg, rgba(69, 183, 209, 0.1), rgba(150, 201, 61, 0.05))'
+    id: 3,
+    title: 'Freelancers',
+    icon: <PersonIcon sx={{ fontSize: 36, color: '#4facfe' }} />,
+    description: 'Attract more clients with a compelling portfolio that highlights your expertise.',
+    color: '#4facfe'
   },
   {
-    icon: <CodeIcon sx={{ fontSize: 40, color: '#f9ca24' }} />,
-    title: 'Developers',
-    description: 'Highlight your coding projects with live demos and technical documentation.',
-    gradient: 'linear-gradient(135deg, #f9ca24, #f0932b)',
-    features: ['Live Demos', 'GitHub Integration', 'Tech Stack'],
-    color: '#f9ca24',
-    bgGradient: 'linear-gradient(135deg, rgba(249, 202, 36, 0.1), rgba(240, 147, 43, 0.05))'
+    id: 4,
+    title: 'Agencies & Teams',
+    icon: <GroupIcon sx={{ fontSize: 36, color: '#43e97b' }} />,
+    description: 'Showcase your team\'s collective expertise and portfolio of successful projects.',
+    color: '#43e97b'
   },
   {
-    icon: <MusicNoteIcon sx={{ fontSize: 40, color: '#6c5ce7' }} />,
-    title: 'Musicians',
-    description: 'Share your music with embedded players and upcoming event calendars.',
-    gradient: 'linear-gradient(135deg, #6c5ce7, #a29bfe)',
-    features: ['Music Player', 'Event Calendar', 'Merch Store'],
-    color: '#6c5ce7',
-    bgGradient: 'linear-gradient(135deg, rgba(108, 92, 231, 0.1), rgba(162, 155, 254, 0.05))'
+    id: 5,
+    title: 'Entrepreneurs',
+    icon: <BusinessIcon sx={{ fontSize: 36, color: '#fa709a' }} />,
+    description: 'Build credibility and attract investors with a professional portfolio.',
+    color: '#fa709a'
   },
   {
-    icon: <RestaurantIcon sx={{ fontSize: 40, color: '#e17055' }} />,
-    title: 'Chefs',
-    description: 'Showcase your culinary creations with recipe collections and booking systems.',
-    gradient: 'linear-gradient(135deg, #e17055, #d63031)',
-    features: ['Recipe Gallery', 'Booking System', 'Menu Showcase'],
-    color: '#e17055',
-    bgGradient: 'linear-gradient(135deg, rgba(225, 112, 85, 0.1), rgba(214, 48, 49, 0.05))'
+    id: 6,
+    title: 'Career Changers',
+    icon: <TrendingUpIcon sx={{ fontSize: 36, color: '#a8edea' }} />,
+    description: 'Transition smoothly into new industries by showcasing transferable skills.',
+    color: '#a8edea'
   }
 ];
 
-const UseCaseCard = ({ useCase, index }) => (
-  <Fade in timeout={1000 + index * 200}>
-    <Card
-      elevation={0}
+// Clean Use Case Item Component
+const UseCaseItem = ({ useCase, index }) => (
+  <Fade in timeout={600 + index * 100}>
+    <Box
       sx={{
-        width: '400px',
-        height: '280px',
-        background: useCase.bgGradient,
-        border: `2px solid ${useCase.color}30`,
-        borderRadius: 4,
-        overflow: 'hidden',
-        position: 'relative',
-        cursor: 'pointer',
-        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+        display: 'flex',
+        alignItems: 'flex-start',
+        gap: 3,
+        p: 3,
+        borderRadius: 2,
+        background: 'rgba(255, 255, 255, 0.05)',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        transition: 'all 0.3s ease',
         '&:hover': {
-          transform: 'translateY(-12px) scale(1.03)',
-          boxShadow: `0 25px 80px ${useCase.color}30`,
-          borderColor: `${useCase.color}60`,
-          '& .card-icon': {
-            transform: 'scale(1.15) rotate(10deg)',
-            background: useCase.gradient,
-          },
-          '& .card-title': {
-            color: useCase.color,
-          },
-          '& .card-bg': {
-            opacity: 0.15,
-          }
+          background: 'rgba(255, 255, 255, 0.08)',
+          borderColor: 'rgba(255, 255, 255, 0.2)',
+          transform: 'translateX(8px)',
         },
       }}
     >
-      {/* Background gradient overlay */}
+      {/* Icon */}
       <Box
-        className="card-bg"
         sx={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: useCase.gradient,
-          opacity: 0,
-          transition: 'opacity 0.4s ease',
+          width: '60px',
+          height: '60px',
+          borderRadius: '50%',
+          background: `linear-gradient(135deg, ${useCase.color}20 0%, ${useCase.color}10 100%)`,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          border: `2px solid ${useCase.color}30`,
+          flexShrink: 0,
         }}
-      />
+      >
+        {useCase.icon}
+      </Box>
 
-      <CardContent sx={{ 
-        p: 4, 
-        height: '100%', 
-        display: 'flex', 
-        flexDirection: 'column',
-        position: 'relative',
-        zIndex: 1
-      }}>
-        {/* Icon */}
-        <Box
-          className="card-icon"
-          sx={{
-            width: 80,
-            height: 80,
-            borderRadius: 3,
-            background: 'rgba(255,255,255,0.1)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            mb: 3,
-            transition: 'all 0.4s ease',
-            border: '2px solid rgba(255,255,255,0.2)',
-            alignSelf: 'flex-start',
-          }}
-        >
-          {useCase.icon}
-        </Box>
-
-        {/* Title */}
+      {/* Content */}
+      <Box sx={{ flex: 1 }}>
         <Typography
-          className="card-title"
-          variant="h4"
+          variant="h6"
           sx={{
-            fontWeight: 700,
-            mb: 2,
             color: 'white',
-            fontSize: '1.5rem',
-            transition: 'color 0.4s ease',
+            fontWeight: 700,
+            fontSize: { xs: '1.1rem', sm: '1.2rem' },
+            mb: 1,
           }}
         >
           {useCase.title}
         </Typography>
-
-        {/* Description */}
         <Typography
-          variant="body1"
+          variant="body2"
           sx={{
-            color: 'rgba(255,255,255,0.8)',
+            color: 'rgba(255, 255, 255, 0.8)',
             lineHeight: 1.6,
-            mb: 3,
-            fontSize: '0.95rem',
-            flex: 1,
+            fontSize: { xs: '0.9rem', sm: '1rem' },
+            fontWeight: 400,
           }}
         >
           {useCase.description}
         </Typography>
-
-        {/* Features */}
-        <Box sx={{ 
-          display: 'flex', 
-          flexWrap: 'wrap', 
-          gap: 1,
-        }}>
-          {useCase.features.map((feature) => (
-            <Chip
-              key={feature}
-              label={feature}
-              size="small"
-              sx={{
-                backgroundColor: 'rgba(255,255,255,0.15)',
-                color: 'white',
-                border: '1px solid rgba(255,255,255,0.3)',
-                fontSize: '0.75rem',
-                height: '28px',
-                fontWeight: 500,
-                '&:hover': {
-                  backgroundColor: `${useCase.color}30`,
-                  borderColor: useCase.color,
-                }
-              }}
-            />
-          ))}
-        </Box>
-      </CardContent>
-    </Card>
+      </Box>
+    </Box>
   </Fade>
 );
 
+// Clean Use Cases Section Component
 const UseCasesSection = () => {
   return (
     <Box
       sx={{
-        background: 'linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%)',
-        py: { xs: 12, sm: 14, md: 16, lg: 18 },
+        background: '#1a202c',
+        py: { xs: 6, sm: 8, md: 10 },
         position: 'relative',
         overflow: 'hidden',
         '&::before': {
@@ -213,110 +135,93 @@ const UseCasesSection = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'radial-gradient(circle at 20% 30%, rgba(162, 89, 255, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(102, 126, 234, 0.08) 0%, transparent 50%)',
-          opacity: 0.6,
+          background: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23a259ff" fill-opacity="0.03"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
+          opacity: 0.5,
         }
       }}
     >
-      <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1 }}>
-        {/* Header */}
-        <Box sx={{ textAlign: 'center', mb: { xs: 8, sm: 10, md: 12 } }}>
+      <Box sx={{
+        maxWidth: '1200px',
+        mx: 'auto',
+        px: { xs: 2, sm: 3, md: 4, lg: 6 },
+        position: 'relative',
+        zIndex: 1
+      }}>
+        {/* Section Header */}
+        <Box sx={{ textAlign: 'center', mb: { xs: 6, sm: 8, md: 10 } }}>
           <Typography
             variant="h2"
             sx={{
-              fontSize: { xs: '2.2rem', sm: '2.8rem', md: '3.2rem', lg: '3.8rem', xl: '4.2rem' },
+              fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem', lg: '3.5rem' },
               fontWeight: 800,
-              mb: 3,
               color: 'white',
+              textShadow: '0 2px 4px rgba(0,0,0,0.3)',
               letterSpacing: '-0.02em',
-              lineHeight: { xs: 1.3, sm: 1.2 },
-              background: 'linear-gradient(135deg, #ffffff 0%, #a259ff 100%)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
+              mb: 2,
             }}
           >
-            Perfect for Every Creative Professional
+            Who is Portfolio Maker For?
           </Typography>
-          
           <Typography
-            variant="h5"
+            variant="h6"
             sx={{
-              fontSize: { xs: '1.1rem', sm: '1.3rem', md: '1.5rem' },
+              color: 'rgba(255, 255, 255, 0.8)',
+              fontSize: { xs: '1rem', sm: '1.1rem', md: '1.2rem' },
               fontWeight: 400,
-              color: 'rgba(255,255,255,0.8)',
-              maxWidth: '800px',
+              maxWidth: '600px',
               mx: 'auto',
               lineHeight: 1.6,
             }}
           >
-            Whether you're a photographer, designer, developer, or any creative professional, 
-            our platform provides the perfect tools to showcase your work and grow your business.
+            Our platform caters to a diverse range of professionals and individuals
           </Typography>
         </Box>
 
-        {/* Horizontal Scrolling Cards */}
-        <Box sx={{ 
-          overflowX: 'auto',
-          overflowY: 'hidden',
-          pb: 2,
-          '&::-webkit-scrollbar': {
-            height: '8px',
-          },
-          '&::-webkit-scrollbar-track': {
-            background: 'rgba(255,255,255,0.1)',
-            borderRadius: '4px',
-          },
-          '&::-webkit-scrollbar-thumb': {
-            background: '#a259ff',
-            borderRadius: '4px',
-            '&:hover': {
-              background: '#8b4dff',
-            }
-          }
-        }}>
-          <Box sx={{ 
-            display: 'flex', 
-            gap: 3,
-            minWidth: 'max-content',
-            px: 2,
-            justifyContent: { xs: 'flex-start', md: 'center' }
-          }}>
-            {useCases.map((useCase, index) => (
-              <UseCaseCard key={index} useCase={useCase} index={index} />
-            ))}
+        {/* Use Cases Grid */}
+        <Grid container spacing={3}>
+          {useCases.map((useCase, index) => (
+            <Grid item xs={12} md={6} key={useCase.id}>
+              <UseCaseItem useCase={useCase} index={index} />
+            </Grid>
+          ))}
+        </Grid>
+
+        {/* Call to Action */}
+        <Box sx={{ textAlign: 'center', mt: { xs: 6, sm: 8, md: 10 } }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, flexWrap: 'wrap' }}>
+            <Chip
+              label="Free to Start"
+              sx={{
+                backgroundColor: 'rgba(162, 89, 255, 0.2)',
+                color: '#a259ff',
+                fontWeight: 600,
+                fontSize: '0.9rem',
+                px: 2,
+              }}
+            />
+            <Chip
+              label="No Coding Required"
+              sx={{
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                color: 'white',
+                fontWeight: 600,
+                fontSize: '0.9rem',
+                px: 2,
+              }}
+            />
+            <Chip
+              label="Professional Templates"
+              sx={{
+                backgroundColor: 'rgba(162, 89, 255, 0.2)',
+                color: '#a259ff',
+                fontWeight: 600,
+                fontSize: '0.9rem',
+                px: 2,
+              }}
+            />
           </Box>
         </Box>
-
-        {/* Bottom CTA */}
-        <Box sx={{ textAlign: 'center', mt: { xs: 8, sm: 10, md: 12 } }}>
-          <Typography
-            variant="h4"
-            sx={{
-              fontSize: { xs: '1.5rem', sm: '1.8rem', md: '2rem' },
-              fontWeight: 700,
-              mb: 3,
-              color: 'white',
-            }}
-          >
-            Ready to Create Your Professional Portfolio?
-          </Typography>
-          
-          <Typography
-            variant="body1"
-            sx={{
-              fontSize: { xs: '1rem', sm: '1.1rem' },
-              color: 'rgba(255,255,255,0.7)',
-              mb: 4,
-              maxWidth: '600px',
-              mx: 'auto',
-            }}
-          >
-            Join thousands of creative professionals who trust our platform to showcase their work 
-            and attract new opportunities.
-          </Typography>
-        </Box>
-      </Container>
+      </Box>
     </Box>
   );
 };

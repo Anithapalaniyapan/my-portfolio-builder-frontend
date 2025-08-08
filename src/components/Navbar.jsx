@@ -13,11 +13,25 @@ const Navbar = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+    // Close mobile menu if open
+    if (mobileOpen) {
+      setMobileOpen(false);
+    }
+  };
+
   const navItems = [
-    { text: 'Use Cases', href: '#use-cases' },
-    { text: 'Solutions', href: '#solutions' },
-    { text: 'Pricing', href: '#pricing' },
-    { text: 'Resources', href: '#resources' }
+    { text: 'Use Cases', id: 'use-cases' },
+    { text: 'Features', id: 'features' },
+    { text: 'Showcase', id: 'showcase' },
+    { text: 'Hero', id: 'hero' }
   ];
 
   const drawer = (
@@ -29,7 +43,12 @@ const Navbar = () => {
       </Box>
       <List>
         {navItems.map((item) => (
-          <ListItem key={item.text} sx={{ py: 1 }}>
+          <ListItem 
+            key={item.text} 
+            sx={{ py: 1 }}
+            onClick={() => scrollToSection(item.id)}
+            button
+          >
             <ListItemText 
               primary={item.text} 
               sx={{ 
@@ -131,8 +150,7 @@ const Navbar = () => {
               {navItems.map((item) => (
                 <Typography
                   key={item.text}
-                  component="a"
-                  href={item.href}
+                  onClick={() => scrollToSection(item.id)}
                   sx={{
                     color: 'rgba(255,255,255,0.8)',
                     textDecoration: 'none',

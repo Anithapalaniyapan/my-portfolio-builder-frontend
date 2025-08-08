@@ -1,51 +1,98 @@
 import React from 'react';
-import { Box, Typography, Grid, Card, CardContent, CardMedia, Button, Chip, Fade } from '@mui/material';
+import { Box, Typography, Grid, Card, CardContent, Button, Chip, Fade, Avatar } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import CodeIcon from '@mui/icons-material/Code';
 import PaletteIcon from '@mui/icons-material/Palette';
 import BusinessIcon from '@mui/icons-material/Business';
+import BrushIcon from '@mui/icons-material/Brush';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 
-// Sample portfolio data
+// Sample portfolio data with abstract visual elements
 const portfolios = [
   {
     id: 1,
     title: 'Creative Developer Portfolio',
     category: 'Development',
-    image: 'src/assets/portfolio-1.jpg',
+    icon: <CodeIcon sx={{ fontSize: 32, color: '#fff' }} />,
+    gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
     description: 'Modern portfolio showcasing web development skills with interactive elements.',
     tech: ['React', 'Node.js', 'MongoDB'],
-    views: '2.4k'
+    views: '2.4k',
+    color: '#667eea'
   },
   {
     id: 2,
     title: 'UX Designer Showcase',
     category: 'Design',
-    image: 'src/assets/portfolio-2.jpg',
+    icon: <PaletteIcon sx={{ fontSize: 32, color: '#fff' }} />,
+    gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
     description: 'Beautiful design portfolio highlighting user experience projects and case studies.',
     tech: ['Figma', 'Adobe XD', 'Sketch'],
-    views: '1.8k'
+    views: '1.8k',
+    color: '#f093fb'
   },
   {
     id: 3,
     title: 'Marketing Professional',
     category: 'Business',
-    image: 'src/assets/portfolio-3.jpg',
+    icon: <TrendingUpIcon sx={{ fontSize: 32, color: '#fff' }} />,
+    gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
     description: 'Professional portfolio demonstrating marketing campaigns and brand strategies.',
     tech: ['Digital Marketing', 'SEO', 'Analytics'],
-    views: '3.1k'
+    views: '3.1k',
+    color: '#4facfe'
   },
   {
     id: 4,
     title: 'Full-Stack Developer',
     category: 'Development',
-    image: 'src/assets/portfolio-4.jpg',
+    icon: <BrushIcon sx={{ fontSize: 32, color: '#fff' }} />,
+    gradient: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
     description: 'Comprehensive portfolio featuring full-stack projects and technical expertise.',
     tech: ['JavaScript', 'Python', 'AWS'],
-    views: '2.7k'
+    views: '2.7k',
+    color: '#43e97b'
   }
 ];
 
-// Portfolio Card Component
+// Abstract Visual Element Component (Static)
+const AbstractVisual = ({ gradient, pattern = 'circles' }) => (
+  <Box
+    sx={{
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      background: gradient,
+      overflow: 'hidden',
+      '&::before': {
+        content: '""',
+        position: 'absolute',
+        top: '-50%',
+        left: '-50%',
+        width: '200%',
+        height: '200%',
+        background: pattern === 'circles' 
+          ? 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 70% 70%, rgba(255,255,255,0.1) 0%, transparent 50%)'
+          : 'linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%), linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%)',
+        backgroundSize: pattern === 'circles' ? '60px 60px' : '20px 20px',
+      },
+      '&::after': {
+        content: '""',
+        position: 'absolute',
+        top: '20%',
+        right: '10%',
+        width: '60px',
+        height: '60px',
+        borderRadius: '50%',
+        background: 'rgba(255,255,255,0.2)',
+      }
+    }}
+  />
+);
+
+// Portfolio Card Component with Static Design
 const PortfolioCard = ({ portfolio, index }) => (
   <Fade in timeout={800 + index * 200}>
     <Card
@@ -59,48 +106,66 @@ const PortfolioCard = ({ portfolio, index }) => (
         boxShadow: '0 8px 32px rgba(0,0,0,0.1)',
         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         overflow: 'hidden',
+        position: 'relative',
         '&:hover': {
           transform: 'translateY(-8px) scale(1.02)',
           boxShadow: '0 20px 40px rgba(162, 89, 255, 0.15)',
-          '& .portfolio-image': {
-            transform: 'scale(1.05)',
-          }
         },
       }}
     >
-      {/* Portfolio Image */}
-      <Box sx={{ position: 'relative', overflow: 'hidden' }}>
-        <CardMedia
-          component="img"
-          height="200"
-          image={portfolio.image}
-          alt={portfolio.title}
-          className="portfolio-image"
+      {/* Abstract Visual Background */}
+      <Box
+        sx={{
+          position: 'relative',
+          height: '180px',
+          overflow: 'hidden',
+        }}
+      >
+        <AbstractVisual gradient={portfolio.gradient} pattern={index % 2 === 0 ? 'circles' : 'grid'} />
+        
+        {/* Static Icon */}
+        <Box
           sx={{
-            transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-            background: 'linear-gradient(45deg, #f0f0f0, #e0e0e0)',
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '80px',
+            height: '80px',
+            borderRadius: '50%',
+            background: 'rgba(255,255,255,0.2)',
+            backdropFilter: 'blur(10px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            border: '2px solid rgba(255,255,255,0.3)',
           }}
-        />
+        >
+          {portfolio.icon}
+        </Box>
+
         {/* Category Chip */}
         <Chip
           label={portfolio.category}
           size="small"
           sx={{
             position: 'absolute',
-            top: 12,
-            left: 12,
-            backgroundColor: 'rgba(162, 89, 255, 0.9)',
-            color: 'white',
+            top: 16,
+            left: 16,
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            color: portfolio.color,
             fontWeight: 600,
             fontSize: '0.75rem',
+            backdropFilter: 'blur(10px)',
           }}
         />
+        
         {/* Views Badge */}
         <Box
           sx={{
             position: 'absolute',
-            top: 12,
-            right: 12,
+            top: 16,
+            right: 16,
             backgroundColor: 'rgba(0, 0, 0, 0.7)',
             color: 'white',
             px: 1.5,
@@ -111,6 +176,7 @@ const PortfolioCard = ({ portfolio, index }) => (
             display: 'flex',
             alignItems: 'center',
             gap: 0.5,
+            backdropFilter: 'blur(10px)',
           }}
         >
           <VisibilityIcon sx={{ fontSize: 16 }} />
@@ -170,7 +236,7 @@ const PortfolioCard = ({ portfolio, index }) => (
           fullWidth
           startIcon={<VisibilityIcon />}
           sx={{
-            backgroundColor: '#a259ff',
+            background: portfolio.gradient,
             color: 'white',
             fontWeight: 600,
             py: 1.2,
@@ -179,8 +245,9 @@ const PortfolioCard = ({ portfolio, index }) => (
             fontSize: '0.9rem',
             boxShadow: '0 4px 12px rgba(162, 89, 255, 0.3)',
             '&:hover': {
-              backgroundColor: '#8b4dff',
+              background: portfolio.gradient,
               boxShadow: '0 6px 16px rgba(162, 89, 255, 0.4)',
+              transform: 'translateY(-2px)',
             },
           }}
         >
@@ -209,7 +276,7 @@ const PortfolioShowcase = () => {
           bottom: 0,
           background: 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
           opacity: 0.3,
-        }
+        },
       }}
     >
       <Box sx={{ 
